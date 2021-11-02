@@ -17,7 +17,7 @@ class Scatter extends React.Component{
 
         let xDomain = {} ;
         let yDomain = {};
-        console.log(this.props.time)
+        // console.log(this.props.time)
         const row = d => {
             d['origId'] = +d['origId'];
             d['iceLabel'] = +d['iceLabel'];
@@ -38,9 +38,13 @@ class Scatter extends React.Component{
 
         }
         d3.csv(url, row).then(data => {
-            this.setState({
-                scatterPlot: new ScatterD3(this.scatterId.current, data, xDomain, yDomain)
-            })
+            // this.setState({
+            //     scatterPlot: new ScatterD3(this.scatterId.current, data, xDomain, yDomain)
+            // })
+            console.log(this.props.time)
+            console.log(xDomain)
+            console.log(yDomain)
+            new ScatterD3(this.scatterId.current, data, xDomain, yDomain)
         })
     }
 
