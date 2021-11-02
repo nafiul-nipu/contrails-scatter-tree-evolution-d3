@@ -43,7 +43,7 @@ export default class ScatterD3{
             .call(d3.axisLeft(yScale));
 
         let color = d3.scaleOrdinal(d3.schemeSet3)
-            .domain([0,6])
+            .domain([1,6])
 
 
         svg.append('g')
