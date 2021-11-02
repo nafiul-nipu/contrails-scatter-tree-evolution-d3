@@ -14,8 +14,8 @@ export default class ScatterD3{
 
     drawScatter(el, particles, xD, yD){
         let margin = {top: 10, right: 30, bottom: 30, left: 60}
-        const width = d3.select(el).node().clientWidth - margin.left - margin.right;
-        const height = d3.select(el).node().clientHeight - margin.top - margin.bottom;
+        const width = d3.select(el).node().parentNode.clientWidth - margin.left - margin.right;
+        const height = d3.select(el).node().parentNode.clientHeight - margin.top - margin.bottom;
         console.log(width)
         console.log(height)
 
