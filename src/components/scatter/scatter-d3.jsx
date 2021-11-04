@@ -3,16 +3,18 @@ import * as d3 from 'd3';
 
 
 export default class ScatterD3{
-    constructor(element, data, xDomain, yDomain){
+    constructor(element, data, xDomain, yDomain, attributes){
         this.element = element;
         this.data = data;
         this.xDomain = xDomain;
         this.yDomain = yDomain;
+        this.attributes = attributes
 
-        this.drawScatter(this.element, this.data, this.xDomain, this.yDomain);
+        console.log(this.attributes)
+        this.drawScatter(this.element, this.data, this.xDomain, this.yDomain, this.attributes[this.attributes.length - 1]);
     }
 
-    drawScatter(el, particles, xD, yD){
+    drawScatter(el, particles, xD, yD, details){
         let margin = {top: 10, right: 30, bottom: 30, left: 60}
         const width = d3.select(el).node().parentNode.clientWidth - margin.left - margin.right;
         const height = d3.select(el).node().parentNode.clientHeight - margin.top - margin.bottom;
@@ -57,6 +59,32 @@ export default class ScatterD3{
               .style("fill", function(d){ return color(d['cluster'])})
             //   .style("opacity", 0.3)
             //   .style("stroke", "white")
+
+
+        let attr = ['temperature', 'ice_particles', 'ice_mass', 'ice_length'];
+
+        svg.append('g')
+            .selectAll('text')
+            .data(attr)
+            .enter()
+            .append('text')
+            .attr('x', 15)
+            .attr('y', (d,i) => 5 +  i * 12)
+            .attr('font-size', '10px')
+            .text((d) => {
+                return `${d} = ${details[d]}`
+            })
+
+
+        // svg.append('g')
+        //     .append('text')
+        //     .attr('font-size', '10px')
+        //     .text(`
+        //         temperature : ${details.temperature} K 
+        //         ice_length : ${details.ice_length} m 
+        //         ice_mass : ${details.ice_mass.toFixed(3)} mg
+        //         ice_particles : ${details.ice_particles}
+        //     `)
 
         
     }

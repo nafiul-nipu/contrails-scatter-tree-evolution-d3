@@ -37,14 +37,33 @@ class Scatter extends React.Component{
             return d
 
         }
+
+        const attrRow = d => {
+
+            d['nodeCluster'] = +d['nodeCluster'];
+            d['temperature'] = +d['temperature'];
+            d['ice_particles'] = +d['ice_particles'];
+            d['ice_mass'] = +d['ice_mass'];
+            d['ice_length'] = +d['ice_length'];
+            
+            return d
+        }
         d3.csv(url, row).then(data => {
             // this.setState({
             //     scatterPlot: new ScatterD3(this.scatterId.current, data, xDomain, yDomain)
             // })
-            console.log(this.props.time)
-            console.log(xDomain)
-            console.log(yDomain)
-            new ScatterD3(this.scatterId.current, data, xDomain, yDomain)
+            let attrUrl = `https://raw.githubusercontent.com/nafiul-nipu/contrails-scatter-tree-evolution-d3/master/src/data/attribute/${this.props.time}.csv`
+            // console.log(this.props.time)
+            // console.log(xDomain)
+            // console.log(yDomain)
+            d3.csv(attrUrl, attrRow).then(attributes => {
+                // if(this.props.time == 0.1){
+                    new ScatterD3(this.scatterId.current, data, xDomain, yDomain, attributes)
+
+                // }
+                
+            })
+
         })
     }
 
