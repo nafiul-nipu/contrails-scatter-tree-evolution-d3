@@ -71,62 +71,23 @@ class Scatter extends React.Component{
         if(this.props.time === 0.2){
             let url = `https://raw.githubusercontent.com/nafiul-nipu/contrails-scatter-tree-evolution-d3/master/src/data/particles/${this.props.time}.csv`
 
-            let x1Domain = {} ;
-            let y1Domain = {};
+            let xDomain = {} ;
+            let yDomain = {};
 
-            let x2Domain = {} ;
-            let y2Domain = {};
             // console.log(this.props.time)
             const row = d => {
-                d['X1'] = +d['X1'];
-                d['Y1'] = +d['Y1'];
-                d['X2'] = +d['X2'];
-                d['Y2'] = +d['Y2'];
+                d['X'] = +d['X'];
+                d['Y'] = +d['Y'];
 
-                x1Domain.max = Math.max(x1Domain.max || -Infinity, +d['X1']);
-                y1Domain.max = Math.max(y1Domain.max || -Infinity, +d['Y1']);
+                xDomain.max = Math.max(xDomain.max || -Infinity, +d['X']);
+                yDomain.max = Math.max(yDomain.max || -Infinity, +d['Y']);
 
-                x1Domain.min = Math.min(x1Domain.min || Infinity, +d['X1']);
-                y1Domain.min = Math.min(y1Domain.min || Infinity, +d['Y1']);
-
-
-                x2Domain.max = Math.max(x2Domain.max || -Infinity, +d['X2']);
-                y2Domain.max = Math.max(y2Domain.max || -Infinity, +d['Y2']);
-
-                x2Domain.min = Math.min(x2Domain.min || Infinity, +d['X2']);
-                y2Domain.min = Math.min(y2Domain.min || Infinity, +d['Y2']);
+                xDomain.min = Math.min(xDomain.min || Infinity, +d['X']);
+                yDomain.min = Math.min(yDomain.min || Infinity, +d['Y']);
 
                 return d
 
             }
-
-            let xDomain = {}
-            let yDomain = {}
-
-            if (x1Domain.max >= x2Domain.max){
-                xDomain.max = x1Domain.max
-            }else{
-                xDomain.max = x2Domain.max
-            }
-
-            if (x1Domain.min <= x2Domain.min){
-                xDomain.min = x1Domain.min
-            }else{
-                xDomain.min = x2Domain.min
-            }
-
-            if (y1Domain.max >= y2Domain.max){
-                yDomain.max = y1Domain.max
-            }else{
-                yDomain.max = y2Domain.max
-            }
-
-            if (y1Domain.max <= y2Domain.max){
-                yDomain.min = y1Domain.min
-            }else{
-                yDomain.min = y2Domain.min
-            }
-
 
             d3.csv(url, row).then(data => {
             
