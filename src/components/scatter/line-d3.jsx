@@ -44,7 +44,7 @@ export default class LineD3{
                 .datum(shape)
                 .attr("fill", "none")
                 .attr("stroke", "steelblue")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 1)
                 .attr("d", d3.line()
                   .x(function(d) { return x(d.X) })
                   .y(function(d) { return y(d.Y) })
