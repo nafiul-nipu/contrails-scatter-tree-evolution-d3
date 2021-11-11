@@ -13,6 +13,7 @@ export default class LineD3{
     }
 
     drawLine(el, shape, xD, yD){
+        console.log(shape)
         let margin = {top: 10, right: 30, bottom: 30, left: 60}
         const width = d3.select(el).node().parentNode.clientWidth - margin.left - margin.right;
         const height = d3.select(el).node().parentNode.clientHeight - margin.top - margin.bottom;
