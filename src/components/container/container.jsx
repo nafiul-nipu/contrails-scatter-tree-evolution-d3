@@ -59,12 +59,6 @@ class ContainerComponent extends React.Component{
                         </Col>
                     </Row>
 
-                    <Row xs={12} style={{height: '35vh'}}>
-                        <Col xs={12}>
-                            Node link
-                        </Col>
-                    </Row>
-
                     <Row xs={12} style={{height: '30vh'}}>
                         <Col xs={2} style={{height: '30vh'}}>
                             <Scatter time={0.16} />
@@ -80,6 +74,12 @@ class ContainerComponent extends React.Component{
                         </Col >
                         <Col xs={2} style={{height: '30vh'}}>
                             <Scatter time = {0.2} />
+                        </Col>
+                    </Row>
+
+                    <Row xs={12} style={{height: '35vh'}}>
+                        <Col xs={12}>
+                            Node link
                         </Col>
                     </Row>
                 </Container>
