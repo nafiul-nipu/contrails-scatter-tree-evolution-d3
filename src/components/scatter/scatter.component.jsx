@@ -68,7 +68,7 @@ class Scatter extends React.Component{
         // })
 
 
-        if(this.props.time === 0.2){
+        // if(this.props.time === 0.2){
             let url = `https://raw.githubusercontent.com/nafiul-nipu/contrails-scatter-tree-evolution-d3/master/src/data/particles/${this.props.time}.csv`
 
             let xDomain = {} ;
@@ -96,7 +96,7 @@ class Scatter extends React.Component{
             })
 
 
-        }
+        // }
     }
 
     shouldComponentUpdate(nextProps){
