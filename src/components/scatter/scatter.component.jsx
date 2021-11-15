@@ -14,40 +14,50 @@ class Scatter extends React.Component{
     }
 
     componentDidMount(){
+        // console.log(this.props.folder, this.props.time)
 
         // if(this.props.time === 0.2){
-            let url = `https://raw.githubusercontent.com/nafiul-nipu/contrails-scatter-tree-evolution-d3/master/src/data/particles/contrails1/${this.props.time}.csv`
+            let url = `https://raw.githubusercontent.com/nafiul-nipu/contrails-scatter-tree-evolution-d3/master/src/data/particles/${this.props.folder}/${this.props.time}.json`
 
             let xDomain = {} ;
             let yDomain = {};
 
             // console.log(this.props.time)
-            const row = d => {
-                d['X'] = +d['X'];
-                d['Y'] = +d['Y'];
+            // const row = d => {
+            //     d['X'] = +d['X'];
+            //     d['Y'] = +d['Y'];
 
-                xDomain.max = Math.max(xDomain.max || -Infinity, +d['X']);
-                yDomain.max = Math.max(yDomain.max || -Infinity, +d['Y']);
+            //     xDomain.max = Math.max(xDomain.max || -Infinity, +d['X']);
+            //     yDomain.max = Math.max(yDomain.max || -Infinity, +d['Y']);
 
-                xDomain.min = Math.min(xDomain.min || Infinity, +d['X']);
-                yDomain.min = Math.min(yDomain.min || Infinity, +d['Y']);
+            //     xDomain.min = Math.min(xDomain.min || Infinity, +d['X']);
+            //     yDomain.min = Math.min(yDomain.min || Infinity, +d['Y']);
 
-                return d
+            //     return d
 
-            }
+            // }
 
-            d3.csv(url, row).then(data => {
+            d3.json(url).then(data => {
+                
+                // data.forEach(element => {
+                //     row(element)
+                // });
+
+                // console.log(data)
+                if(this.props.folder === 'newData'){
+                    xDomain = {max: 60}
+                    yDomain = {min: -5, max: 5}
+                }else{
+                    xDomain = {max: 16}
+                    yDomain = {min: -2, max: 2}
+                }
             
-                new LineD3(this.scatterId.current, data, xDomain, yDomain)
+                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id)
                 
             })
 
 
         // }
-    }
-
-    shouldComponentUpdate(nextProps){
-        return true
     }
 
     render(){

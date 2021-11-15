@@ -1,4 +1,5 @@
 import React from 'react';
+import * as d3 from 'd3'
 
 import Container from 'react-bootstrap/Container'
 import { Col, Row } from 'react-bootstrap';
@@ -8,11 +9,14 @@ import Scatter from '../scatter/scatter.component';
 class ContainerComponent extends React.Component{
     constructor(){
         super();
-        this.state = {
-            upper: null,
-            lower: null
+        this.state = {value: 'contrails1'}
+        this.dataTime = {
+            contrails1: [0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.2],
+            contrails2: [0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.2],
+            contrails3: [0.1,0.11,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.19,0.2],
+            newData:[210,211,212,213,214,215,216,217,218,219]
         }
-        this.divs = 11
+        this.handleOnChange = this.handleOnChange.bind(this)
     }
 
     componentDidMount(){
@@ -23,88 +27,76 @@ class ContainerComponent extends React.Component{
         // })
 
     }
+    handleOnChange(){
+        var val = document.getElementById("selection").value;
+        this.setState({value: val});
+        // console.log(val)
+
+    }
 
     render(){
         // console.log(this.state)
-        // if(this.state.upper === null){
-        //     return <div>Wait</div>
-        // }else{
+        if(this.state.value){
+            console.log('container')
+            console.log(this.state.value)
             return(
                 <Container fluid>
-                    <Row xs={12} style={{height: '30vh'}}>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time={0.1}     
-                                // time={210}                          
-                            />                            
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time={0.11} 
-                                // time={211}                           
-                            /> 
-
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time={0.12}
-                                // time={212}
-                            />
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter  
-                                time = {0.13}
-                                // time={213}
-                            />
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time={0.14} 
-                                // time={213}
-                            />
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter
-                                time = {0.15} 
-                                // time={214}
-                            />
+                    <Row xs={12} style={{height: '5vh'}}>
+                        <Col xs={12}>
+                            <select id='selection' onChange={this.handleOnChange}>
+                                <option value='contrails1'>contrails1</option>
+                                <option value='contrails2'>contrails2</option>
+                                <option value='contrails3'>contrails3</option>
+                                <option value='newData'>newData</option>
+                            </select>
                         </Col>
                     </Row>
 
                     <Row xs={12} style={{height: '30vh'}}>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time={0.16} 
-                                // time={215}
-                            />
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time = {0.17} 
-                                // time={216}
-                            />
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time = {0.18} 
-                                // time={217}
-                            />
-                        </Col>
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time = {0.19} 
-                                // time={218}
-                            />
-                        </Col >
-                        <Col xs={2} style={{height: '30vh'}}>
-                            <Scatter 
-                                time = {0.2} 
-                                // time={219}
-                            />
-                        </Col>
+                        {
+                            this.dataTime[this.state.value].map((el, i) => {
+                                // console.log(el, i)
+                                if(i < 6){
+                                    return(
+                                        <Col id='shape' xs={2} style={{height: '30vh'}}>
+                                        <Scatter
+                                            key = {`${this.state.value}-${el}`}
+                                            folder ={this.state.value}     
+                                            time={el}    
+                                            id={i}                      
+                                        />                            
+                                        </Col>
+                                    )                                    
+
+                                }
+                            })
+                        } 
+
                     </Row>
 
-                    <Row xs={12} style={{height: '35vh'}}>
+                    <Row xs={12} style={{height: '30vh'}}>
+                        {
+                            this.dataTime[this.state.value].map((el, i) => {
+                                // console.log(el, i)
+                                if(i > 5){
+                                    return(
+                                        <Col id='shape' xs={2} style={{height: '30vh'}}>
+                                        <Scatter
+                                            key = {`${this.state.value}-${el}`}
+                                            folder ={this.state.value}     
+                                            time={el}      
+                                            id={i}                    
+                                        />                            
+                                        </Col>
+                                    ) 
+                                }
+                            })
+                        } 
+
+                    </Row>
+
+
+                    <Row xs={12} style={{height: '30vh'}}>
                         <Col xs={12}>
                             Node link
                         </Col>
@@ -112,7 +104,7 @@ class ContainerComponent extends React.Component{
                 </Container>
             )
             
-        // }
+        }
         
     }
 }
