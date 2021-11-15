@@ -56,9 +56,9 @@ class ContainerComponent extends React.Component{
                         {
                             this.dataTime[this.state.value].map((el, i) => {
                                 // console.log(el, i)
-                                if(i < 6){
+                                if(i < 4){
                                     return(
-                                        <Col id='shape' xs={2} style={{height: '30vh'}}>
+                                        <Col id='shape' xs={3} style={{height: '30vh'}}>
                                         <Scatter
                                             key = {`${this.state.value}-${el}`}
                                             folder ={this.state.value}     
@@ -78,9 +78,9 @@ class ContainerComponent extends React.Component{
                         {
                             this.dataTime[this.state.value].map((el, i) => {
                                 // console.log(el, i)
-                                if(i > 5){
+                                if(i > 3 && i < 8){
                                     return(
-                                        <Col id='shape' xs={2} style={{height: '30vh'}}>
+                                        <Col id='shape' xs={3} style={{height: '30vh'}}>
                                         <Scatter
                                             key = {`${this.state.value}-${el}`}
                                             folder ={this.state.value}     
@@ -97,10 +97,28 @@ class ContainerComponent extends React.Component{
 
 
                     <Row xs={12} style={{height: '30vh'}}>
-                        <Col xs={12}>
-                            Node link
-                        </Col>
+                        {
+                            this.dataTime[this.state.value].map((el, i) => {
+                                // console.log(el, i)
+                                if(i > 7){
+                                    return(
+                                        <Col id='shape' xs={3} style={{height: '30vh'}}>
+                                        <Scatter
+                                            key = {`${this.state.value}-${el}`}
+                                            folder ={this.state.value}     
+                                            time={el}      
+                                            id={i}                    
+                                        />                            
+                                        </Col>
+                                    ) 
+                                }
+                            })
+                        } 
+
                     </Row>
+
+
+
                 </Container>
             )
             
