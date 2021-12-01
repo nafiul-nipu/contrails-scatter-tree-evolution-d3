@@ -52,7 +52,7 @@ class Scatter extends React.Component{
                     yDomain = {min: -2, max: 2}
                 }
             
-                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id)
+                new LineD3(this.scatterId.current, data, xDomain, yDomain, this.props.id, this.props.time)
                 
             })
 
